@@ -1,0 +1,29 @@
+INCLUDE_DIRS := Includes
+CC 			 := g++
+CFLAGS 		 := -I$(INCLUDE_DIRS)
+
+OBJS 		 := customErrorClass.o final.o mainFinal.o
+DEPS 		 := ${INCLUDE_DIRS}/customErrorClass.h final.h
+
+
+.PHONY: clean all
+
+all: customErrorClass.o final.o mainFinal.o mulu_EmployeeFinal
+
+clean:
+	rm $(OBJS) mulu_EmployeeFinal
+
+customErrorClass.o: customErrorClass.cpp ${DEPS}
+	$(CC) -c -o $@ $(CFLAGS) $<
+
+final.o: final.cpp ${DEPS}
+	$(CC) -c -o $@ $(CFLAGS) $<
+
+mainFinal.o: mainFinal.cpp ${DEPS}
+	$(CC) -c -o $@ $(CFLAGS) $<
+
+mulu_EmployeeFinal: $(OBJS)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+
+
